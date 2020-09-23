@@ -1,0 +1,24 @@
+import React from 'react';
+import test from './test.jpg';
+import './Home.css';
+import {Jumbotron, Button} from 'react-bootstrap'
+
+
+function Home() {
+  return(
+    <div  style={{ justifyContent: "center", alignItems: "center", display: "flex", width: "100%", height: "100vh", backgroundImage:`url(${test})`}}>
+      <Jumbotron>
+      <h1>Window of Opportunity</h1>
+      <p>
+        Making windows easy.
+      </p>
+      <p>
+        <Button href= "/Add" variant="primary">Get started</Button>
+      </p>
+    </Jumbotron>
+    </div>
+  );
+}
+
+export default Home;
+
