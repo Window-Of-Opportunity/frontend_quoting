@@ -101,7 +101,7 @@ function Add() {
       <div class="m-5">
         <Button variant="dark">Add to Quote</Button>{' '}
         <Button variant="dark">Advanced</Button>{' '}
-        <Button style={{ float: 'right' }} variant="dark">View Quote</Button>{' '}
+        <Button href="./Cart" style={{ float: 'right' }} variant="dark">View Quote</Button>{' '}
       </div>
     </React.StrictMode>
   );

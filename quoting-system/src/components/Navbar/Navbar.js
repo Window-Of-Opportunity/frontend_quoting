@@ -5,6 +5,7 @@ import Home from '../../views/Home/Home';
 import Add from '../../views/Add/Add';
 import Register from '../../views/Register/Register';
 import Login from '../../views/Login/Login';
+import Cart from '../../views/Cart/Cart';
 import {
   BrowserRouter as Router,
   Switch,
@@ -41,6 +42,9 @@ function Navbar_woo() {
           </Route>
           <Route exact path="/Login">
             <Login />
+          </Route>
+          <Route exact path="/Cart">
+            <Cart />
           </Route>
         </Switch>
     </Router>
