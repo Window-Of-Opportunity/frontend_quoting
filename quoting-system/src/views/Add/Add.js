@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import test from './test.png';
-import { InputGroup, FormControl, Carousel, Button} from 'react-bootstrap';
+import { InputGroup, Form, Col, Carousel, Button} from 'react-bootstrap';
 
 function Add() {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   return(
     <React.StrictMode>
       <Carousel>
@@ -37,71 +49,65 @@ function Add() {
         </Carousel.Item>
       </Carousel>
       <div class="m-5">
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Type</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Type of Window"
-            aria-label="Type of Window"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Name</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Name of Window"
-            aria-label="Name of Window"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Width</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Inches"
-            aria-label="Inches"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Height</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Inches"
-            aria-label="Inches"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Quantity</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="# of windows"
-            aria-label="# of windows"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">Color</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Color of Window"
-            aria-label="Color of Window"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-      </div>
-      <div class="m-5">
-        <Button variant="dark">Add to Quote</Button>{' '}
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form.Group controlId="validationCustom01">
+            <Form.Label>Window Name</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Name of Window"
+            />
+            <Form.Control.Feedback type="invalid">
+                Please provide a valid window name.
+            </Form.Control.Feedback>
+          </Form.Group>
+        <Form.Row>
+          <Form.Group as={Col} controlId="validationCustom02">
+            <Form.Label>Width</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Width in inches"
+            />
+            <Form.Control.Feedback type="invalid">
+                Please provide a valid width.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} controlId="validationCustomUsername">
+            <Form.Label>Height</Form.Label>
+            <InputGroup>
+              <Form.Control
+                type="text"
+                placeholder="Height in inches"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid height.
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="validationCustom03">
+            <Form.Label>Quantity</Form.Label>
+            <Form.Control type="text" placeholder="Number of Windows" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid quantity.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} controlId="validationCustom04">
+            <Form.Label>Frame</Form.Label>
+            <Form.Control type="text" placeholder="Frame type" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid frame type.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Button variant="dark" type="submit">Add to Quote</Button>{' '}
         <Button variant="dark">Advanced</Button>{' '}
         <Button href="./Cart" style={{ float: 'right' }} variant="dark">View Quote</Button>{' '}
+      </Form>
       </div>
     </React.StrictMode>
   );
