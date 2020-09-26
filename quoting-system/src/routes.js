@@ -4,6 +4,7 @@ import Add from './views/Add/Add';
 import Register from './views/Register/Register';
 import Login from './views/Login/Login';
 import Cart from './views/Cart/Cart';
+import Pricing from './views/Pricing/Pricing';
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,7 +20,7 @@ export const Routes = () => {
                     <Add />
                 </Route>
                 <Route exact path="/">
-                    <Redirect to="/Home"></Redirect>
+                    <Redirect to="/Add"></Redirect>
                 </Route>
                 <Route exact path="/Home">
                     <Home />
@@ -32,6 +33,9 @@ export const Routes = () => {
                 </Route>
                 <Route exact path="/Cart">
                     <Cart />
+                </Route>
+                <Route exact path="/Pricing">
+                    <Pricing />
                 </Route>
             </Switch>
         </Router>

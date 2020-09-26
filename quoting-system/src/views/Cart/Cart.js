@@ -1,9 +1,14 @@
 import React from 'react';
+import {Button} from 'react-bootstrap';
 
 
 function Cart() {
   return(
-    <h1>Cart Page Placeholder</h1>
+    <div>
+      <h1>Cart Page Placeholder</h1>
+      <br></br>
+      <Button href="/Pricing" variant="primary">View Pricing</Button>
+    </div>
   );
 }
 
