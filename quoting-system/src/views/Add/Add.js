@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import test from './test.png';
-import { InputGroup, Form, Col, Carousel, Button} from 'react-bootstrap';
+import { InputGroup, Form, Col, Carousel, Button, Modal} from 'react-bootstrap';
 
 function Add() {
   const [validated, setValidated] = useState(false);
@@ -15,6 +15,11 @@ function Add() {
 
     setValidated(true);
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return(
     <React.StrictMode>
@@ -105,10 +110,24 @@ function Add() {
           </Form.Group>
         </Form.Row>
         <Button variant="dark" type="submit">Add to Quote</Button>{' '}
-        <Button variant="dark">Advanced</Button>{' '}
+        <Button variant="dark" onClick={handleShow}>Advanced</Button>{' '}
         <Button href="./Cart" style={{ float: 'right' }} variant="dark">View Quote</Button>{' '}
       </Form>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Advanced Window Options</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Tempering, etc...</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </React.StrictMode>
   );
 }
