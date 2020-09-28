@@ -7,7 +7,7 @@ import {Jumbotron, Button} from 'react-bootstrap'
 function Home() {
   return(
     <div  style={{ justifyContent: "center", alignItems: "center", display: "flex", width: "100%", height: "100vh", backgroundImage:`url(${test})`}}>
-      <Jumbotron>
+      <Jumbotron variant="dark">
         <h1>Window of Opportunity</h1>
         <p>
           Making windows easy.
