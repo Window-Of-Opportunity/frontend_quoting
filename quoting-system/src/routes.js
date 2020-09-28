@@ -5,6 +5,7 @@ import Register from './views/Register/Register';
 import Login from './views/Login/Login';
 import Cart from './views/Cart/Cart';
 import Pricing from './views/Pricing/Pricing';
+import Test from './views/Test/Test';
 import {
     BrowserRouter as Router,
     Switch,
@@ -36,6 +37,9 @@ export const Routes = () => {
                 </Route>
                 <Route exact path="/Pricing">
                     <Pricing />
+                </Route>
+		<Route exact path="/Test">
+                    <Test />
                 </Route>
             </Switch>
         </Router>

@@ -23,6 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # python backend folder/files
-venv
-__pycache__
-api
+venv\
+__pycache__\
+api\
