@@ -63,6 +63,25 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
+Deploys on Heroku. Process for doing so is below:
+
+1. "npm install serve --s" in my terminal
+
+"scripts": {
+"dev": "react-scripts start",
+"start": "serve -s build",
+"build": "react-scripts build",
+"test": "react-scripts test --env=jsdom",
+"eject": "react-scripts eject",
+"heroku-postbuild": "npm run build"
+}
+
+1. copied the above code("scripts") in place of my previous code "scripts" in my package.json file
+1. git commit -am "new update"
+1. git push heroku master
+
+If the build fails and discusses yarn, follow the directions give.
+
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
