@@ -4,13 +4,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm dev`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### 'npm start'
+
+Runs the build routine that is specified for heroku. Enables heroku to build the app once deployed.
+
 
 ### `npm test`
 
@@ -62,6 +67,25 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 ### Deployment
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+Deploys on Heroku. Process for doing so is below:
+
+1. "npm install serve --s" in my terminal
+
+"scripts": {
+"dev": "react-scripts start",
+"start": "serve -s build",
+"build": "react-scripts build",
+"test": "react-scripts test --env=jsdom",
+"eject": "react-scripts eject",
+"heroku-postbuild": "npm run build"
+}
+
+1. copied the above code("scripts") in place of my previous code "scripts" in my package.json file
+1. git commit -am "new update"
+1. git push heroku master
+
+If the build fails and discusses yarn, follow the directions give.
 
 ### `npm run build` fails to minify
 
