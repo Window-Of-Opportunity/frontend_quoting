@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup
+
+Clone this repository, then in terminal navigate to the folder frontend_quoting and run script `npm install` to install required dependencies.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -12,7 +16,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### 'npm start'
+### `npm start`
 
 Runs the build routine that is specified for heroku. Enables heroku to build the app once deployed.
 
