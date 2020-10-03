@@ -1,42 +1,53 @@
 import React from 'react';
-import {Button, Table} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 
 function Cart() {
+  const selectRow = {
+    mode: 'checkbox',
+    clickToSelect: true,
+    bgColor: 'gray'
+  };
+
+  const columns = [{
+    dataField: 'name',
+    text: 'Name'
+  }, {
+    dataField: 'width',
+    text: 'Width'
+  }, {
+    dataField: 'height',
+    text: 'Height'
+  }, {
+    dataField: 'frame',
+    text: 'Frame'
+  }, {
+    dataField: 'quantity',
+    text: 'Quantity'
+  }, {
+    dataField: 'type',
+    text: 'Type'
+  }];
+  
+  const products = [{
+    name: 'Building 1 Room 1', width: '12', height: '12', frame: "Fiberglass", quantity: "20", type: "SH image"
+  },{
+    name: 'Building 1 Room 2', width: '25', height: '25', frame: "Wood", quantity: "5", type: "DH image"
+  }];
+  
   return(
     <div class="m-5">
       <Button href="/Add" variant="dark">Back</Button>{' '}
       <p></p>
-      <Table responsive striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Width</th>
-            <th>Height</th>
-            <th>Frame</th>
-            <th>Quantity</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Building 1 Room 1</td>
-            <td>12</td>
-            <td>12</td>
-            <td>Fiberglass</td>
-            <td>20</td>
-            <td>SH Image</td>
-          </tr>
-          <tr>
-            <td>Building 1 Room 2</td>
-            <td>25</td>
-            <td>25</td>
-            <td>Wood</td>
-            <td>25</td>
-            <td>DH Image</td>
-          </tr>
-        </tbody>
-      </Table>
+      <BootstrapTable
+        wrapperClasses="table-responsive"
+        striped bordered
+        keyField='name'
+        data={ products }
+        columns={ columns }
+        selectRow={ selectRow }
+      />
       <Button variant="dark">Delete</Button>{' '}
       <Button variant="dark">Duplicate</Button>{' '}
       <Button variant="dark">Examine</Button>{' '}
