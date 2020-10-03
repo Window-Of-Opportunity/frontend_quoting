@@ -17,7 +17,7 @@ function Register() {
     };
 
   return(
-    <div style={{ justifyContent: "center", alignItems: "center", display: "flex", width: "100%", height: "100vh", backgroundImage:`url(${test})`}}>
+    <div style={{ justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)", backgroundImage:`url(${test})`}}>
         <Jumbotron>
             <h1>Registration:</h1>
             <br></br>
