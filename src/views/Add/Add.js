@@ -102,11 +102,16 @@ function Add() {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} controlId="validationCustom04">
-            <Form.Label>Frame</Form.Label>
-            <Form.Control type="text" placeholder="Frame type" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid frame type.
-            </Form.Control.Feedback>
+            <Form.Label>Frame Type</Form.Label>
+            <Form.Control
+              as="select"
+              custom
+              required
+            >
+              <option value="0">Fiberglass</option>
+              <option value="1">Stone</option>
+              <option value="2">Wood</option>
+            </Form.Control>
           </Form.Group>
         </Form.Row>
         <Button variant="dark" type="submit">Add to Quote</Button>{' '}
@@ -118,7 +123,16 @@ function Add() {
         <Modal.Header closeButton>
           <Modal.Title>Advanced Window Options</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Tempering, etc...</Modal.Body>
+        <Modal.Body>
+        <Form inline>
+          <Form.Check
+            type="checkbox"
+            id="customControlInline"
+            label="Tempering"
+            custom
+          />
+        </Form>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
