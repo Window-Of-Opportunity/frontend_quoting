@@ -73,7 +73,7 @@ function Pricing() {
         </tbody>
       </Table>
       <Button variant="dark">Download</Button>{' '}
-      <Button variant="dark" style={{ float: 'right' }}>Complete Order</Button>{' '}
+      <Button variant="dark" href="/Agreement" style={{ float: 'right' }}>Complete Order</Button>{' '}
     </div>
   );
 }
