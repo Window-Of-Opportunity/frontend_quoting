@@ -7,7 +7,7 @@ function Pricing() {
     <div class="m-5">
       <Button href="/Cart" variant="dark">Edit Cart</Button>{' '}
       <p></p>
-      <Table striped bordered hover variant="dark">
+      <Table responsive striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>Name</th>
@@ -47,7 +47,7 @@ function Pricing() {
           </tr>
         </tbody>
       </Table>
-      <Table striped bordered hover variant="dark">
+      <Table responsive striped bordered hover variant="dark">
         <thead>
           <tr>
             <th colSpan="2">Name</th>

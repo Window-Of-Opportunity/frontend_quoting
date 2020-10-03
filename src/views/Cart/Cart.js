@@ -7,7 +7,7 @@ function Cart() {
     <div class="m-5">
       <Button href="/Add" variant="dark">Back</Button>{' '}
       <p></p>
-      <Table striped bordered hover variant="dark">
+      <Table responsive striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>Name</th>
