@@ -4,10 +4,36 @@ import BootstrapTable from 'react-bootstrap-table-next';
 
 
 function Cart() {
+
+  //var [products, setProducts] = useState(1);
+
+  let products = [{
+    name: 'Building 1 Room 1', width: '12', height: '12', frame: "Fiberglass", quantity: "20", type: "SH image"
+  },{
+    name: 'Building 1 Room 2', width: '25', height: '25', frame: "Wood", quantity: "5", type: "DH image"
+  }];
+
+  let selectedRows = [];
+
   const selectRow = {
     mode: 'checkbox',
     clickToSelect: true,
-    bgColor: 'gray'
+    bgColor: 'gray',
+    onSelect: (row, isSelect, rowIndex, e) => {
+      window.alert("[" + row + ", " + isSelect + ", " + rowIndex + ", " + e + "]");
+      if(isSelect){
+        console.log("Added " + rowIndex);
+        selectedRows.push(rowIndex);
+      }else{
+        for(var i = 0; i < selectedRows.length; i++){
+          if(selectedRows[i] === rowIndex){
+            selectedRows.splice(i, 1);
+            console.log("Removed " + rowIndex);
+          }
+        }
+      }
+      console.log(selectedRows);
+    }
   };
 
   const columns = [{
@@ -29,12 +55,17 @@ function Cart() {
     dataField: 'type',
     text: 'Type'
   }];
-  
-  const products = [{
-    name: 'Building 1 Room 1', width: '12', height: '12', frame: "Fiberglass", quantity: "20", type: "SH image"
-  },{
-    name: 'Building 1 Room 2', width: '25', height: '25', frame: "Wood", quantity: "5", type: "DH image"
-  }];
+
+  function duplicateRow(){
+    console.log(selectedRows);
+    for(var i = 0; i < selectedRows.length; i++){
+      products.push(products[selectedRows[i]]);
+      console.log("Duplicating: " + selectedRows[i]);
+    }
+    console.log(products);
+    //var products2 = products;
+    //setProducts(products2)
+  }
   
   return(
     <div class="m-5">
@@ -44,12 +75,14 @@ function Cart() {
         wrapperClasses="table-responsive"
         striped bordered
         keyField='name'
+        onDataSizeChange= {(e) => {console.log(e)}}
         data={ products }
         columns={ columns }
         selectRow={ selectRow }
       />
+      <cartTable/>
       <Button variant="dark">Delete</Button>{' '}
-      <Button variant="dark">Duplicate</Button>{' '}
+      <Button variant="dark" onClick={duplicateRow}>Duplicate</Button>{' '}
       <Button variant="dark">Examine</Button>{' '}
       <Button variant="dark">Save</Button>{' '}
       <Button variant="dark">AR View</Button>{' '}

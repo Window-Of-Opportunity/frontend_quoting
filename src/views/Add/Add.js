@@ -14,12 +14,23 @@ function Add() {
     }
 
     setValidated(true);
+    window.alert("{" + windowName.current.value + ", " + 
+                windowWidth.current.value + ", "  + 
+                windowHeight.current.value + ", " +
+                windowQuantity.current.value + ", "  + 
+                windowFrame.current.value + "}");
   };
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  let windowName = React.createRef();
+  let windowWidth = React.createRef();
+  let windowHeight = React.createRef();
+  let windowQuantity = React.createRef();
+  let windowFrame = React.createRef();
 
   return(
     <React.StrictMode>
@@ -59,6 +70,7 @@ function Add() {
             <Form.Label>Window Name</Form.Label>
             <Form.Control
               required
+              ref={windowName}
               type="text"
               placeholder="Name of Window"
             />
@@ -71,7 +83,8 @@ function Add() {
             <Form.Label>Width</Form.Label>
             <Form.Control
               required
-              type="text"
+              ref={windowWidth}
+              type="number"
               placeholder="Width in inches"
             />
             <Form.Control.Feedback type="invalid">
@@ -82,7 +95,8 @@ function Add() {
             <Form.Label>Height</Form.Label>
             <InputGroup>
               <Form.Control
-                type="text"
+                type="number"
+                ref={windowHeight}
                 placeholder="Height in inches"
                 aria-describedby="inputGroupPrepend"
                 required
@@ -96,7 +110,11 @@ function Add() {
         <Form.Row>
           <Form.Group as={Col} controlId="validationCustom03">
             <Form.Label>Quantity</Form.Label>
-            <Form.Control type="text" placeholder="Number of Windows" required />
+            <Form.Control 
+              ref={windowQuantity}
+              type="number" 
+              placeholder="Number of Windows" 
+              required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid quantity.
             </Form.Control.Feedback>
@@ -104,13 +122,14 @@ function Add() {
           <Form.Group as={Col} controlId="validationCustom04">
             <Form.Label>Frame Type</Form.Label>
             <Form.Control
+              ref={windowFrame}
               as="select"
               custom
               required
             >
-              <option value="0">Fiberglass</option>
-              <option value="1">Stone</option>
-              <option value="2">Wood</option>
+              <option value="Fiberglass">Fiberglass</option>
+              <option value="Stone">Stone</option>
+              <option value="Wood">Wood</option>
             </Form.Control>
           </Form.Group>
         </Form.Row>

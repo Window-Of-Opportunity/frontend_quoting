@@ -26,7 +26,7 @@ function Login() {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 required
-                type="text"
+                type="email"
               />
               <Form.Control.Feedback type="invalid">
                   Please provide a valid email.
