@@ -1,17 +1,14 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
+import Cookies from 'js-cookie';
 
 
 function Cart() {
 
   //var [products, setProducts] = useState(1);
 
-  let products = [{
-    name: 'Building 1 Room 1', width: '12', height: '12', frame: "Fiberglass", quantity: "20", type: "SH image"
-  },{
-    name: 'Building 1 Room 2', width: '25', height: '25', frame: "Wood", quantity: "5", type: "DH image"
-  }];
+  let products = JSON.parse(Cookies.get('sugar'));
 
   let selectedRows = [];
 

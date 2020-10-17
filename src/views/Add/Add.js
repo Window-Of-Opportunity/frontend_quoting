@@ -2,23 +2,39 @@ import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import test from './test.png';
 import { InputGroup, Form, Col, Carousel, Button, Modal} from 'react-bootstrap';
+import Cookies from 'js-cookie';
+
+//Single Hung, Double Hung, Arched, Awning, Bay, Bow, Casement, Egress, Garden Style, Glass Block, Hopper, Jalousie, Picture, Round Circle, Skylight, Sliding, Storm, Transom, Oriel, Bay, Dormer
+
 
 function Add() {
   const [validated, setValidated] = useState(false);
+  //Cookies.remove('sugar');
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    }else{
+      //if the cookie is not found, create a new cookie with this data.
+      if(Cookies.get('sugar') == null){
+        Cookies.set('sugar', [{ name: windowName.current.value, width: windowWidth.current.value, height: windowHeight.current.value, 
+          frame: windowFrame.current.value, quantity: windowQuantity.current.value, type: "SH IMAGE"}]);
+      }else{
+        //or else unpack the cookie and add more data to it.
+        let temp = JSON.parse(Cookies.get('sugar'));
+        temp.push({ name: windowName.current.value, width: windowWidth.current.value, height: windowHeight.current.value, 
+          frame: windowFrame.current.value, quantity: windowQuantity.current.value, type: "SH IMAGE"});
+          console.log(temp);
+        Cookies.set('sugar', temp);
+      }
+      //check what is in the cookie
+      window.alert("Sugar cookie currently contains: " + Cookies.get('sugar'));
     }
 
     setValidated(true);
-    window.alert("{" + windowName.current.value + ", " + 
-                windowWidth.current.value + ", "  + 
-                windowHeight.current.value + ", " +
-                windowQuantity.current.value + ", "  + 
-                windowFrame.current.value + "}");
+
   };
 
   const [show, setShow] = useState(false);
@@ -26,6 +42,7 @@ function Add() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //let windowType = React.createRef();
   let windowName = React.createRef();
   let windowWidth = React.createRef();
   let windowHeight = React.createRef();
