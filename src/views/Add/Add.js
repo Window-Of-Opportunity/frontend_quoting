@@ -29,7 +29,8 @@ var defaultAdditionalOptions = true;
 
 function Add() {
   const [validated, setValidated] = useState(false);
-  //Cookies.remove('sugar');
+  // Cookies.remove('sugar');
+  // Cookies.remove('chocolate');
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;

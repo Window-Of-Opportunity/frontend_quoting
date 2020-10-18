@@ -10,8 +10,13 @@ function Cart() {
   var [selectedRows] = useState(1);
 
   //Cookies.remove('chocolate');
-  //get products from the local cookie 'sugar'
-  products = JSON.parse(Cookies.get('sugar'));
+  //get products from the local cookie 'sugar', if empty products is an empty array.
+  if(Cookies.get('sugar') == null){
+    products = [];
+  }else{
+    //else set products to cookie value
+    products = JSON.parse(Cookies.get('sugar'));
+  }
 
   //cookie for row selection
   //if the cookie does not exist selectedRows is an empty array
@@ -22,6 +27,7 @@ function Cart() {
     selectedRows = JSON.parse(Cookies.get('chocolate'));
     selectedRows.sort((a, b) => (a.id > b.id) ? 1 : -1);
   }
+
   //generate unique primary keys
   generatePrimaryKeys();
 
