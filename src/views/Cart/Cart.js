@@ -9,18 +9,27 @@ function Cart() {
   var [products, setProducts] = useState(1);
   var [selectedRows] = useState(1);
 
+  //Cookies.remove('chocolate');
   //get products from the local cookie 'sugar'
   products = JSON.parse(Cookies.get('sugar'));
+
+  if(Cookies.get('chocolate') == null){
+    selectedRows = [];
+  }else{
+    selectedRows = JSON.parse(Cookies.get('chocolate'));
+  }
   //generate unique primary keys
   generatePrimaryKeys();
 
   //selected rows array for delete, duplicate, and inspect functions.
-  selectedRows = [];
 
   //states for modal
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  function handleClose(){
+    Cookies.remove('chocolate');
+    setShow(false)
+  };
   const handleShow = () => setShow(true);
 
   //selectrow attributes for react-bootstrap-table2
@@ -41,7 +50,8 @@ function Cart() {
           }
         }
       }
-      //console.log(selectedRows);
+      Cookies.set('chocolate', selectedRows);
+      console.log(JSON.parse(Cookies.get('chocolate')));
     },
     onSelectAll: (isSelect, rows, e) => {
       if(!isSelect){
@@ -52,6 +62,7 @@ function Cart() {
           selectedRows.push(products[i]);
         }
       }
+      Cookies.set('chocolate', selectedRows);
       //log(selectedRows);
     },
     selected: []
@@ -61,7 +72,7 @@ function Cart() {
   const columns = [{
     dataField: 'id',
     text: 'ID',
-    hidden: true
+    //hidden: true
   }, {
     dataField: 'name',
     text: 'Name'
@@ -93,6 +104,7 @@ function Cart() {
     generatePrimaryKeys();
     Cookies.set('sugar', products);
     setProducts(JSON.parse(Cookies.get('sugar')));
+    Cookies.remove('chocolate');
     //console.log(products);
   }
 
@@ -107,6 +119,7 @@ function Cart() {
     generatePrimaryKeys();
     Cookies.set('sugar', products);
     setProducts(JSON.parse(Cookies.get('sugar')));
+    Cookies.remove('chocolate');
     //console.log(products);
   }
   
@@ -136,22 +149,25 @@ function Cart() {
       <Button variant="dark">Save</Button>{' '}
       <Button variant="dark">AR View</Button>{' '}
       <Button href="/Pricing" variant="dark" style={{ float: 'right' }}>Generate Quote</Button>{' '}
-      <Modal size = 'xl' show={show} onHide={handleClose}>
+      <Modal size = 'xl' show={show} onHide={handleClose} overflow-x = "auto">
         <Modal.Header closeButton>
           <Modal.Title>Advanced Window Inspection View</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <CardDeck>
-            {products.map((product) => (
-              <Card style={{ width: '18rem' }}>
+            {selectedRows.map((product) => (
+              <Card style={{ minWidth: '200px' }}>
                 <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Title>Name: {product.name}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">ID: {product.id}</Card.Subtitle>
                   <Card.Text>
-                    {product.type}
+                    Type: {product.type}
                   </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                  <ListGroupItem>Width: {product.width} Height: {product.height}</ListGroupItem>
+                  {/* <ListGroupItem>Width: {product.width} inches Height: {product.height} inches</ListGroupItem> */}
+                  <ListGroupItem>Width: {product.width} inches</ListGroupItem>
+                  <ListGroupItem>Height: {product.height} inches</ListGroupItem>
                   <ListGroupItem>Frame: {product.frame}</ListGroupItem>
                   <ListGroupItem>Quantity: {product.quantity}</ListGroupItem>
                   <ListGroupItem>Number of Panes: {product.numPanes}</ListGroupItem>
