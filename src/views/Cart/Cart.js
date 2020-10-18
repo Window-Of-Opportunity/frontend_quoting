@@ -117,6 +117,7 @@ function Cart() {
   //delete row func
   function deleteRow(){
     //console.log(selectedRows);
+    //sort rows before deleting
     selectedRows.sort((a, b) => (a.id > b.id) ? 1 : -1);
     for(var i = selectedRows.length - 1; i >= 0; i--){
       products.splice(selectedRows[i].id, 1);
@@ -162,27 +163,24 @@ function Cart() {
         <Modal.Body>
           <CardDeck>
             {selectedRows.map((product) => (
-              <Card style={{ minWidth: '200px' }}>
+              <Card style={{ minWidth: '200px', marginBottom:"20px"}}>
                 <Card.Body>
-                  <Card.Title>Name: {product.name}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">ID: {product.id}</Card.Subtitle>
-                  <Card.Text>
-                    Type: {product.type}
-                  </Card.Text>
+                  <Card.Title><b>Name:</b> {product.name}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted"><b>ID:</b> {product.id}</Card.Subtitle>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                  {/* <ListGroupItem>Width: {product.width} inches Height: {product.height} inches</ListGroupItem> */}
-                  <ListGroupItem>Width: {product.width} inches</ListGroupItem>
-                  <ListGroupItem>Height: {product.height} inches</ListGroupItem>
-                  <ListGroupItem>Frame: {product.frame}</ListGroupItem>
-                  <ListGroupItem>Quantity: {product.quantity}</ListGroupItem>
-                  <ListGroupItem>Number of Panes: {product.numPanes}</ListGroupItem>
-                  <ListGroupItem>Obscured: {product.obscured === true ? "yes" : "no"}</ListGroupItem>
-                  <ListGroupItem>Tempered: {product.tempered === true ? "yes" : "no"}</ListGroupItem>
-                  <ListGroupItem>Gas Filling Type: {product.gasFillingType}</ListGroupItem>
-                  <ListGroupItem>LowE3: {product.lowE3 === true ? "yes" : "no"}</ListGroupItem>
-                  <ListGroupItem>Nailing Flange: {product.nailingFlange === true ? "yes" : "no"}</ListGroupItem>
-                  <ListGroupItem>Color: {product.color}</ListGroupItem>
+                  <ListGroupItem><b>Type:</b> {product.type}</ListGroupItem>
+                  <ListGroupItem><b>Width:</b> {product.width} inches</ListGroupItem>
+                  <ListGroupItem><b>Height:</b> {product.height} inches</ListGroupItem>
+                  <ListGroupItem><b>Frame:</b> {product.frame}</ListGroupItem>
+                  <ListGroupItem><b>Quantity:</b> {product.quantity}</ListGroupItem>
+                  <ListGroupItem><b>Number of Panes:</b> {product.numPanes}</ListGroupItem>
+                  <ListGroupItem><b>Obscured:</b> {product.obscured === true ? "yes" : "no"}</ListGroupItem>
+                  <ListGroupItem><b>Tempered:</b> {product.tempered === true ? "yes" : "no"}</ListGroupItem>
+                  <ListGroupItem><b>Gas Filling Type:</b> {product.gasFillingType}</ListGroupItem>
+                  <ListGroupItem><b>LowE3:</b> {product.lowE3 === true ? "yes" : "no"}</ListGroupItem>
+                  <ListGroupItem><b>Nailing Flange:</b> {product.nailingFlange === true ? "yes" : "no"}</ListGroupItem>
+                  <ListGroupItem><b>Color:</b> {product.color}</ListGroupItem>
                 </ListGroup>
               </Card>
             ))}
