@@ -31,17 +31,17 @@ function Cart() {
     onSelect: (row, isSelect, rowIndex, e) => {
       //window.alert("[" + row + ", " + isSelect + ", " + rowIndex + ", " + e + "]");
       if(isSelect){
-        console.log("Added " + rowIndex);
+        //console.log("Added " + rowIndex);
         selectedRows.push(products[rowIndex]);
       }else{
         for(var i = 0; i < selectedRows.length; i++){
           if(selectedRows[i].id === rowIndex){
             selectedRows.splice(i, 1);
-            console.log("Removed " + rowIndex);
+            //console.log("Removed " + rowIndex);
           }
         }
       }
-      console.log(selectedRows);
+      //console.log(selectedRows);
     },
     onSelectAll: (isSelect, rows, e) => {
       if(!isSelect){
@@ -52,7 +52,7 @@ function Cart() {
           selectedRows.push(products[i]);
         }
       }
-      console.log(selectedRows);
+      //log(selectedRows);
     },
     selected: []
   };
@@ -85,29 +85,29 @@ function Cart() {
 
   //duplicate row func
   function duplicateRow(){
-    console.log(selectedRows);
+    //console.log(selectedRows);
     for(var i = 0; i < selectedRows.length; i++){
       products.push(products[selectedRows[i].id]);
-      console.log("Duplicating: " + selectedRows[i].id);
+      //console.log("Duplicating: " + selectedRows[i].id);
     }
     generatePrimaryKeys();
     Cookies.set('sugar', products);
     setProducts(JSON.parse(Cookies.get('sugar')));
-    console.log(products);
+    //console.log(products);
   }
 
   //delete row func
   function deleteRow(){
-    console.log(selectedRows);
+    //console.log(selectedRows);
     selectedRows.sort((a, b) => (a.id > b.id) ? 1 : -1);
     for(var i = selectedRows.length - 1; i >= 0; i--){
       products.splice(selectedRows[i].id, 1);
-      console.log("Deleting: " + selectedRows[i].id);
+      //console.log("Deleting: " + selectedRows[i].id);
     }
     generatePrimaryKeys();
     Cookies.set('sugar', products);
     setProducts(JSON.parse(Cookies.get('sugar')));
-    console.log(products);
+    //console.log(products);
   }
   
   //generate PKs for table
@@ -155,11 +155,11 @@ function Cart() {
                   <ListGroupItem>Frame: {product.frame}</ListGroupItem>
                   <ListGroupItem>Quantity: {product.quantity}</ListGroupItem>
                   <ListGroupItem>Number of Panes: {product.numPanes}</ListGroupItem>
-                  <ListGroupItem>Obscured: {product.obscured}</ListGroupItem>
-                  <ListGroupItem>Tempered: {product.tempered}</ListGroupItem>
+                  <ListGroupItem>Obscured: {product.obscured === true ? "yes" : "no"}</ListGroupItem>
+                  <ListGroupItem>Tempered: {product.tempered === true ? "yes" : "no"}</ListGroupItem>
                   <ListGroupItem>Gas Filling Type: {product.gasFillingType}</ListGroupItem>
-                  <ListGroupItem>LowE3: {product.lowE3}</ListGroupItem>
-                  <ListGroupItem>Nailing Flange: {product.nailingFlange}</ListGroupItem>
+                  <ListGroupItem>LowE3: {product.lowE3 === true ? "yes" : "no"}</ListGroupItem>
+                  <ListGroupItem>Nailing Flange: {product.nailingFlange === true ? "yes" : "no"}</ListGroupItem>
                   <ListGroupItem>Color: {product.color}</ListGroupItem>
                 </ListGroup>
               </Card>

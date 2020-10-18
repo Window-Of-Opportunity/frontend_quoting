@@ -62,12 +62,12 @@ function Add() {
         //or else unpack the cookie and add more data to it.
         let temp = JSON.parse(Cookies.get('sugar'));
         temp.push(attributes);
-          console.log(temp);
+        //console.log(temp);
         Cookies.set('sugar', temp);
       }
       //check what is in the cookie
       //console.log(attributes);
-      window.alert("Sugar cookie currently contains: " + Cookies.get('sugar'));
+      //window.alert("Sugar cookie currently contains: " + Cookies.get('sugar'));
     }
 
     setValidated(true);
@@ -78,13 +78,13 @@ function Add() {
     //const form = event.currentTarget;
     defaultAdditionalOptions = false;
     attributes.numPanes = numPanes.current.value;
-    attributes.obscured = obscured.current.value;
-    attributes.tempered = tempered.current.value;
+    attributes.obscured = obscured.current.checked;
+    attributes.tempered = tempered.current.checked;
     attributes.gasFillingType = gasFillingType.current.value;
-    attributes.lowE3 = lowE3.current.value;
-    attributes.nailingFlange = nailingFlange.current.value;
+    attributes.lowE3 = lowE3.current.checked;
+    attributes.nailingFlange = nailingFlange.current.checked;
     attributes.color = color.current.value;
-    console.log(attributes);
+    //console.log(attributes);
     handleClose();
   };
 
