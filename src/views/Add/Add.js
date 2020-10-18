@@ -237,70 +237,88 @@ function Add() {
           <Modal.Title>Advanced Window Options</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          < Form.Label>Number of Panes</Form.Label>
+          <Form.Group>
+            <Form.Label>Number of Panes</Form.Label>
             <Form.Control
               ref={numPanes}
               as="select"
-              value = "3"
               custom
               required
             >
-              {NUMBER_PANES.map((value, index) => {
+              {NUMBER_PANES.map((value) => {
+                  if(value === 3)
+                    return <option value={value} selected>{value}</option>
                   return <option value={value}>{value}</option>
                 })}
             </Form.Control>
-          <Form.Check
-            ref={obscured}
-            type="checkbox"
-            id="customControlInline"
-            label="Obscured"
-            custom
-          />
-          <Form.Check
-            ref={tempered}
-            type="checkbox"
-            id="customControlInline"
-            label="Tempering"
-            custom
-          />
-          < Form.Label>Gas Filling Type</Form.Label>
+          </Form.Group>
+          <Form.Group>
+            <Form.Check
+              ref={obscured}
+              type="checkbox"
+              id="a"
+              label="Obscured"
+              custom
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Check
+              ref={tempered}
+              type="checkbox"
+              id="b"
+              label="Tempering"
+              custom
+            />
+          </Form.Group>
+          <Form.Group>
+            < Form.Label>Gas Filling Type</Form.Label>
             <Form.Control
               ref={gasFillingType}
               as="select"
               custom
               required
             >
-              {GAS_FILLING_TYPE.map((value, index) => {
+              {GAS_FILLING_TYPE.map((value) => {
+                  if(value === "Argon")
+                    return <option value={value} selected>{value}</option>
                   return <option value={value}>{value}</option>
                 })}
             </Form.Control>
-          <Form.Check
-            ref={lowE3}
-            type="checkbox"
-            label="LowE3"
-            id="customControlInline"
-            defaultChecked="true"
-            custom
-          />
-          <Form.Check
-            ref={nailingFlange}
-            type="checkbox"
-            label="Nailing flange"
-            id="customControlInline"
-            custom
-          />
-          < Form.Label>Color</Form.Label>
-            <Form.Control
-              ref={color}
-              as="select"
-              value = "3"
+          </Form.Group>
+          <Form.Group>
+            <Form.Check
+              ref={lowE3}
+              type="checkbox"
+              label="LowE3"
+              id="c"
+              defaultChecked="true"
               custom
-              required
-            >
-              {COLOR_VALUES.map((value, index) => {
-                  return <option value={value}>{value}</option>
-                })}
-            </Form.Control>
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Check
+              ref={nailingFlange}
+              type="checkbox"
+              label="Nailing flange"
+              id="d"
+              custom
+            />
+          </Form.Group>
+          <Form.Group>
+            < Form.Label>Color</Form.Label>
+              <Form.Control
+                ref={color}
+                as="select"
+                custom
+                required
+              >
+                {COLOR_VALUES.map((value, index) => {
+                    if(value === "Ebony")
+                      return <option value={value} selected>{value}</option>
+                    return <option value={value}>{value}</option>
+                  })}
+              </Form.Control>
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
