@@ -13,10 +13,14 @@ function Cart() {
   //get products from the local cookie 'sugar'
   products = JSON.parse(Cookies.get('sugar'));
 
+  //cookie for row selection
+  //if the cookie does not exist selectedRows is an empty array
   if(Cookies.get('chocolate') == null){
     selectedRows = [];
   }else{
+    //sort rows received from cookie
     selectedRows = JSON.parse(Cookies.get('chocolate'));
+    selectedRows.sort((a, b) => (a.id > b.id) ? 1 : -1);
   }
   //generate unique primary keys
   generatePrimaryKeys();
@@ -97,6 +101,8 @@ function Cart() {
   //duplicate row func
   function duplicateRow(){
     //console.log(selectedRows);
+    //sort rows before duplication.
+    selectedRows.sort((a, b) => (a.id > b.id) ? 1 : -1);
     for(var i = 0; i < selectedRows.length; i++){
       products.push(products[selectedRows[i].id]);
       //console.log("Duplicating: " + selectedRows[i].id);
