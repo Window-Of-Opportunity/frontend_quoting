@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, Modal, Card, CardDeck} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import Cookies from 'js-cookie';
 
@@ -8,10 +8,18 @@ function Cart() {
 
   var [products, setProducts] = useState(1);
 
+  //get products from the local cookie 'sugar'
   products = JSON.parse(Cookies.get('sugar'));
+  //generate unique primary keys
   generatePrimaryKeys();
 
+  //selected rows array for delete, duplicate, and inspect functions.
   let selectedRows = [];
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const selectRow = {
     mode: 'checkbox',
@@ -38,7 +46,7 @@ function Cart() {
   const columns = [{
     dataField: 'id',
     text: 'ID',
-    hidden: false
+    hidden: true
   }, {
     dataField: 'name',
     text: 'Name'
@@ -106,10 +114,51 @@ function Cart() {
       />
       <Button variant="dark" onClick={deleteRow}>Delete</Button>{' '}
       <Button variant="dark" onClick={duplicateRow}>Duplicate</Button>{' '}
-      <Button variant="dark">Examine</Button>{' '}
+      <Button variant="dark" onClick={handleShow}>Examine</Button>{' '}
       <Button variant="dark">Save</Button>{' '}
       <Button variant="dark">AR View</Button>{' '}
       <Button href="/Pricing" variant="dark" style={{ float: 'right' }}>Generate Quote</Button>{' '}
+      <Modal size = 'xl' show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Advanced Window Inspection View</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CardDeck>
+            {[
+  'Primary',
+  'Secondary',
+  'Success',
+  'Danger',
+  'Warning',
+  'Info',
+  'Light',
+  'Dark',
+].map((variant, idx) => (
+  <Card
+    bg={variant.toLowerCase()}
+    key={idx}
+    text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
+    style={{ width: '18rem' }}
+    className="mb-2"
+  >
+    <Card.Header>Header</Card.Header>
+    <Card.Body>
+      <Card.Title>{variant} Card Title </Card.Title>
+      <Card.Text>
+        Some quick example text to build on the card title and make up the bulk
+        of the card's content.
+      </Card.Text>
+    </Card.Body>
+  </Card>
+))}
+          </CardDeck>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

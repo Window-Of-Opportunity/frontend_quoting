@@ -4,8 +4,28 @@ import test from './test.png';
 import { InputGroup, Form, Col, Carousel, Button, Modal} from 'react-bootstrap';
 import Cookies from 'js-cookie';
 
-//Single Hung, Double Hung, Arched, Awning, Bay, Bow, Casement, Egress, Garden Style, Glass Block, Hopper, Jalousie, Picture, Round Circle, Skylight, Sliding, Storm, Transom, Oriel, Bay, Dormer
+//Window types
+const WINDOW_TYPES = ["Single Hung", "Double Hung", "Arched", "Awning", "Bay", "Bow", "Casement", "Egress", "Garden Style", "Glass Block", "Hopper", "Jalousie", "Picture",
+   "Round Circle", "Skylight", "Sliding", "Storm", "Transom", "Oriel", "Bay", "Dormer"];
 
+//Window frame types
+const WINDOW_FRAMES = ["Wood", "Vinyl", "Fiberglass", "Aluminum"];
+
+//Number of panes
+const NUMBER_PANES = [1, 2, 3, 4];
+
+//Gas filling types
+const GAS_FILLING_TYPE = ["Argon", "Krypton", "Xenon"];
+
+//Color values
+const COLOR_VALUES = ["Ebony", "Bahama Brown", "Bright Silver Pearlescent", "Bronze", "Cadet Gray", "Cascade Blue", "Cashmere", "Clay", "Coconut Cream", "Copper Pearlescent", "Evergreen",
+                "Gunmetal", "Hampton Sage", "Liberty Bronze Pearlescent", "Pebble Gray", "Sierra White", "Stone White", "Suede", "Wineberry"];
+
+//"on" and "off" represent booleans for the check boxes.
+var attributes = {};
+
+//determines whether additional options shall be default values.
+var defaultAdditionalOptions = true;
 
 function Add() {
   const [validated, setValidated] = useState(false);
@@ -18,18 +38,35 @@ function Add() {
       event.stopPropagation();
     }else{
       //if the cookie is not found, create a new cookie with this data.
+      attributes.name = windowName.current.value;
+      attributes.width = windowWidth.current.value;
+      attributes.height = windowHeight.current.value;
+      attributes.frame =  windowFrame.current.value;
+      attributes.quantity = windowQuantity.current.value;
+      attributes.type = windowType.current.value;
+
+      //if statement to take care of additional options
+      if(defaultAdditionalOptions){
+        attributes.numPanes = 3;
+        attributes.obscured = "off";
+        attributes.tempered = "off";
+        attributes.gasFillingType = "Argon";
+        attributes.lowE3 = "on";
+        attributes.nailingFlange = "off";
+        attributes.color = "Ebony";
+      }
+
       if(Cookies.get('sugar') == null){
-        Cookies.set('sugar', [{ name: windowName.current.value, width: windowWidth.current.value, height: windowHeight.current.value, 
-          frame: windowFrame.current.value, quantity: windowQuantity.current.value, type: "SH IMAGE"}]);
+        Cookies.set('sugar', [attributes]);
       }else{
         //or else unpack the cookie and add more data to it.
         let temp = JSON.parse(Cookies.get('sugar'));
-        temp.push({ name: windowName.current.value, width: windowWidth.current.value, height: windowHeight.current.value, 
-          frame: windowFrame.current.value, quantity: windowQuantity.current.value, type: "SH IMAGE"});
+        temp.push(attributes);
           console.log(temp);
         Cookies.set('sugar', temp);
       }
       //check what is in the cookie
+      //console.log(attributes);
       window.alert("Sugar cookie currently contains: " + Cookies.get('sugar'));
     }
 
@@ -37,17 +74,41 @@ function Add() {
 
   };
 
+  const AdditionalOptionSubmit = (event) => {
+    //const form = event.currentTarget;
+    defaultAdditionalOptions = false;
+    attributes.numPanes = numPanes.current.value;
+    attributes.obscured = obscured.current.value;
+    attributes.tempered = tempered.current.value;
+    attributes.gasFillingType = gasFillingType.current.value;
+    attributes.lowE3 = lowE3.current.value;
+    attributes.nailingFlange = nailingFlange.current.value;
+    attributes.color = color.current.value;
+    console.log(attributes);
+    handleClose();
+  };
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  //let windowType = React.createRef();
+  //defining base options
+  let windowType = React.createRef();
   let windowName = React.createRef();
   let windowWidth = React.createRef();
   let windowHeight = React.createRef();
   let windowQuantity = React.createRef();
   let windowFrame = React.createRef();
+
+  //defining additional options
+  let numPanes = React.createRef();
+  let obscured = React.createRef();
+  let tempered = React.createRef();
+  let gasFillingType = React.createRef();
+  let lowE3 = React.createRef();
+  let nailingFlange = React.createRef();
+  let color = React.createRef();
 
   return(
     <React.StrictMode>
@@ -83,6 +144,21 @@ function Add() {
       </Carousel>
       <div class="m-5">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom05">
+              <Form.Label>Window Type</Form.Label>
+              <Form.Control
+                ref={windowType}
+                as="select"
+                custom
+                required
+              >
+                {WINDOW_TYPES.map((value, index) => {
+                  return <option value={value}>{value}</option>
+                })}
+              </Form.Control>
+            </Form.Group>
+          </Form.Row>
           <Form.Group controlId="validationCustom01">
             <Form.Label>Window Name</Form.Label>
             <Form.Control
@@ -144,9 +220,9 @@ function Add() {
               custom
               required
             >
-              <option value="Fiberglass">Fiberglass</option>
-              <option value="Stone">Stone</option>
-              <option value="Wood">Wood</option>
+              {WINDOW_FRAMES.map((value, index) => {
+                  return <option value={value}>{value}</option>
+                })}
             </Form.Control>
           </Form.Group>
         </Form.Row>
@@ -156,27 +232,85 @@ function Add() {
       </Form>
       </div>
       <Modal show={show} onHide={handleClose}>
+        <Form>
         <Modal.Header closeButton>
           <Modal.Title>Advanced Window Options</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form inline>
+          < Form.Label>Number of Panes</Form.Label>
+            <Form.Control
+              ref={numPanes}
+              as="select"
+              value = "3"
+              custom
+              required
+            >
+              {NUMBER_PANES.map((value, index) => {
+                  return <option value={value}>{value}</option>
+                })}
+            </Form.Control>
           <Form.Check
+            ref={obscured}
+            type="checkbox"
+            id="customControlInline"
+            label="Obscured"
+            custom
+          />
+          <Form.Check
+            ref={tempered}
             type="checkbox"
             id="customControlInline"
             label="Tempering"
             custom
           />
-        </Form>
+          < Form.Label>Gas Filling Type</Form.Label>
+            <Form.Control
+              ref={gasFillingType}
+              as="select"
+              custom
+              required
+            >
+              {GAS_FILLING_TYPE.map((value, index) => {
+                  return <option value={value}>{value}</option>
+                })}
+            </Form.Control>
+          <Form.Check
+            ref={lowE3}
+            type="checkbox"
+            label="LowE3"
+            id="customControlInline"
+            defaultChecked="true"
+            custom
+          />
+          <Form.Check
+            ref={nailingFlange}
+            type="checkbox"
+            label="Nailing flange"
+            id="customControlInline"
+            custom
+          />
+          < Form.Label>Color</Form.Label>
+            <Form.Control
+              ref={color}
+              as="select"
+              value = "3"
+              custom
+              required
+            >
+              {COLOR_VALUES.map((value, index) => {
+                  return <option value={value}>{value}</option>
+                })}
+            </Form.Control>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={AdditionalOptionSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </React.StrictMode>
   );
