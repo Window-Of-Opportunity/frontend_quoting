@@ -40,6 +40,7 @@ function Cart() {
     Cookies.remove('chocolate');
     setShow(false)
   };
+
   const handleShow = () => setShow(true);
 
   //selectrow attributes for react-bootstrap-table2
@@ -144,7 +145,7 @@ function Cart() {
   }
 
   //render
-  return(
+  return (
     <div class="m-5">
       <Button href="/Add" variant="dark">Back</Button>{' '}
       <p></p>
@@ -152,24 +153,24 @@ function Cart() {
         wrapperClasses="table-responsive"
         striped bordered
         keyField='id'
-        data={ products }
-        columns={ columns }
-        selectRow={ selectRow }
+        data={products}
+        columns={columns}
+        selectRow={selectRow}
       />
       <Button variant="dark" onClick={deleteRow}>Delete</Button>{' '}
       <Button variant="dark" onClick={duplicateRow}>Duplicate</Button>{' '}
       <Button variant="dark" onClick={handleShow}>Examine</Button>{' '}
       <Button variant="dark">Save</Button>{' '}
-      <Button variant="dark">AR View</Button>{' '}
+      <Button variant="dark" href="windowofopportunity://">AR View</Button>{' '}
       <Button href="/Pricing" variant="dark" style={{ float: 'right' }}>Generate Quote</Button>{' '}
-      <Modal size = 'xl' show={show} onHide={handleClose} overflow-x = "auto">
+      <Modal size='xl' show={show} onHide={handleClose} overflow-x="auto">
         <Modal.Header closeButton>
           <Modal.Title>Advanced Window Inspection View</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <CardDeck>
             {selectedRows.map((product) => (
-              <Card style={{ minWidth: '200px', marginBottom:"20px"}}>
+              <Card style={{ minWidth: '200px', marginBottom: "20px" }}>
                 <Card.Body>
                   <Card.Title><b>Name:</b> {product.name}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted"><b>ID:</b> {product.id}</Card.Subtitle>

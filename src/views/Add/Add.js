@@ -111,7 +111,7 @@ function Add() {
   let nailingFlange = React.createRef();
   let color = React.createRef();
 
-  return(
+  return (
     <React.StrictMode>
       <Carousel>
         <Carousel.Item>
@@ -169,144 +169,144 @@ function Add() {
               placeholder="Name of Window"
             />
             <Form.Control.Feedback type="invalid">
-                Please provide a valid window name.
+              Please provide a valid window name.
             </Form.Control.Feedback>
           </Form.Group>
-        <Form.Row>
-          <Form.Group as={Col} controlId="validationCustom02">
-            <Form.Label>Width</Form.Label>
-            <Form.Control
-              required
-              ref={windowWidth}
-              type="number"
-              placeholder="Width in inches"
-            />
-            <Form.Control.Feedback type="invalid">
-                Please provide a valid width.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} controlId="validationCustomUsername">
-            <Form.Label>Height</Form.Label>
-            <InputGroup>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom02">
+              <Form.Label>Width</Form.Label>
               <Form.Control
-                type="number"
-                ref={windowHeight}
-                placeholder="Height in inches"
-                aria-describedby="inputGroupPrepend"
                 required
+                ref={windowWidth}
+                type="number"
+                placeholder="Width in inches"
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid height.
-              </Form.Control.Feedback>
-            </InputGroup>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} controlId="validationCustom03">
-            <Form.Label>Quantity</Form.Label>
-            <Form.Control 
-              ref={windowQuantity}
-              type="number" 
-              placeholder="Number of Windows" 
-              required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid quantity.
+                Please provide a valid width.
             </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} controlId="validationCustom04">
-            <Form.Label>Frame Type</Form.Label>
-            <Form.Control
-              ref={windowFrame}
-              as="select"
-              custom
-              required
-            >
-              {WINDOW_FRAMES.map((value, index) => {
+            </Form.Group>
+            <Form.Group as={Col} controlId="validationCustomUsername">
+              <Form.Label>Height</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  type="number"
+                  ref={windowHeight}
+                  placeholder="Height in inches"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid height.
+              </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId="validationCustom03">
+              <Form.Label>Quantity</Form.Label>
+              <Form.Control
+                ref={windowQuantity}
+                type="number"
+                placeholder="Number of Windows"
+                required />
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid quantity.
+            </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} controlId="validationCustom04">
+              <Form.Label>Frame Type</Form.Label>
+              <Form.Control
+                ref={windowFrame}
+                as="select"
+                custom
+                required
+              >
+                {WINDOW_FRAMES.map((value, index) => {
                   return <option value={value}>{value}</option>
                 })}
-            </Form.Control>
-          </Form.Group>
-        </Form.Row>
-        <Button variant="dark" type="submit">Add to Quote</Button>{' '}
-        <Button variant="dark" onClick={handleShow}>Advanced</Button>{' '}
-        <Button href="./Cart" style={{ float: 'right' }} variant="dark">View Quote</Button>{' '}
-      </Form>
+              </Form.Control>
+            </Form.Group>
+          </Form.Row>
+          <Button variant="dark" type="submit">Add to Quote</Button>{' '}
+          <Button variant="dark" onClick={handleShow}>Advanced</Button>{' '}
+          <Button href="./Cart" style={{ float: 'right' }} variant="dark">View Quote</Button>{' '}
+        </Form>
       </div>
       <Modal show={show} onHide={handleClose}>
         <Form>
-        <Modal.Header closeButton>
-          <Modal.Title>Advanced Window Options</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group>
-            <Form.Label>Number of Panes</Form.Label>
-            <Form.Control
-              ref={numPanes}
-              as="select"
-              custom
-              required
-            >
-              {NUMBER_PANES.map((value) => {
-                  if(value === 3)
+          <Modal.Header closeButton>
+            <Modal.Title>Advanced Window Options</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group>
+              <Form.Label>Number of Panes</Form.Label>
+              <Form.Control
+                ref={numPanes}
+                as="select"
+                custom
+                required
+              >
+                {NUMBER_PANES.map((value) => {
+                  if (value === 3)
                     return <option value={value} selected>{value}</option>
                   return <option value={value}>{value}</option>
                 })}
-            </Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Check
-              ref={obscured}
-              type="checkbox"
-              id="a"
-              label="Obscured"
-              custom
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Check
-              ref={tempered}
-              type="checkbox"
-              id="b"
-              label="Tempering"
-              custom
-            />
-          </Form.Group>
-          <Form.Group>
-            < Form.Label>Gas Filling Type</Form.Label>
-            <Form.Control
-              ref={gasFillingType}
-              as="select"
-              custom
-              required
-            >
-              {GAS_FILLING_TYPE.map((value) => {
-                  if(value === "Argon")
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Check
+                ref={obscured}
+                type="checkbox"
+                id="a"
+                label="Obscured"
+                custom
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Check
+                ref={tempered}
+                type="checkbox"
+                id="b"
+                label="Tempering"
+                custom
+              />
+            </Form.Group>
+            <Form.Group>
+              < Form.Label>Gas Filling Type</Form.Label>
+              <Form.Control
+                ref={gasFillingType}
+                as="select"
+                custom
+                required
+              >
+                {GAS_FILLING_TYPE.map((value) => {
+                  if (value === "Argon")
                     return <option value={value} selected>{value}</option>
                   return <option value={value}>{value}</option>
                 })}
-            </Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Check
-              ref={lowE3}
-              type="checkbox"
-              label="LowE3"
-              id="c"
-              defaultChecked="true"
-              custom
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Check
-              ref={nailingFlange}
-              type="checkbox"
-              label="Nailing flange"
-              id="d"
-              custom
-            />
-          </Form.Group>
-          <Form.Group>
-            < Form.Label>Color</Form.Label>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Check
+                ref={lowE3}
+                type="checkbox"
+                label="LowE3"
+                id="c"
+                defaultChecked="true"
+                custom
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Check
+                ref={nailingFlange}
+                type="checkbox"
+                label="Nailing flange"
+                id="d"
+                custom
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Color</Form.Label>
               <Form.Control
                 ref={color}
                 as="select"
@@ -314,21 +314,21 @@ function Add() {
                 required
               >
                 {COLOR_VALUES.map((value, index) => {
-                    if(value === "Ebony")
-                      return <option value={value} selected>{value}</option>
-                    return <option value={value}>{value}</option>
-                  })}
+                  if (value === "Ebony")
+                    return <option value={value} selected>{value}</option>
+                  return <option value={value}>{value}</option>
+                })}
               </Form.Control>
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
           </Button>
-          <Button variant="primary" onClick={AdditionalOptionSubmit}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+            <Button variant="primary" onClick={AdditionalOptionSubmit}>
+              Save Changes
+                        </Button>
+          </Modal.Footer>
         </Form>
       </Modal>
     </React.StrictMode>
