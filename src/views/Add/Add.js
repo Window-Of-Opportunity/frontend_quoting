@@ -30,7 +30,7 @@ var defaultAdditionalOptions = true;
 function Add() {
   const [validated, setValidated] = useState(false);
   // Cookies.remove('sugar');
-  // Cookies.remove('chocolate');
+  Cookies.remove('chocolate');
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -113,7 +113,7 @@ function Add() {
 
   return (
     <React.StrictMode>
-      <Carousel>
+      <Carousel controls = {true}>
         <Carousel.Item>
           <img
             className="d-block w-100"

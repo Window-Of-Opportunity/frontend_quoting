@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import test from './test.png';
+import test from './test.jpg';
 import {Jumbotron, Button, Form} from 'react-bootstrap';
 
 function Login() {
@@ -16,7 +16,9 @@ function Login() {
   };
 
   return(
-    <div fluid style={{ justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)", backgroundImage:`url(${test})`}}>
+    <div>
+    <div fluid style={{ left: "0", right: "0", position:'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)", backgroundImage:`url(${test})`, backgroundSize: "cover", filter: 'blur(20px)'}}></div>
+    <div fluid style={{ left: "0", right: "0", position:'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)"}}>
         <Jumbotron>
         <h1>Login:</h1>
         <br></br>
@@ -54,6 +56,7 @@ function Login() {
           </p>
         </Form>
       </Jumbotron>
+    </div>
     </div>
   );
 }
