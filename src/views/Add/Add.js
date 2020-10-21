@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from './../../components/WindowCarousel/WindowCarousel'
-import { InputGroup, Form, Col, Button, Modal} from 'react-bootstrap';
-import Cookies from 'js-cookie';
+import { InputGroup, Form, Col, Button, Modal, Alert} from 'react-bootstrap';
 
 //Window types
 const WINDOW_TYPES = ["Single Hung", "Double Hung", "Arched", "Awning", "Bay", "Bow", "Casement", "Egress", "Garden Style", "Glass Block", "Hopper", "Jalousie", "Picture",
@@ -29,8 +28,17 @@ var defaultAdditionalOptions = true;
 
 function Add() {
   const [validated, setValidated] = useState(false);
-  // Cookies.remove('sugar');
-  Cookies.remove('chocolate');
+  const [showAlert, setShowAlert] = useState(false);
+  const [show, setShow] = useState(false);
+
+  var myStorage = sessionStorage;
+
+  myStorage.removeItem('chocolate');
+
+  //myStorage.clear();
+
+  // myStorage.setItem('butter', "toast");
+  // console.log(myStorage.getItem('butter'));
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -38,6 +46,7 @@ function Add() {
       event.preventDefault();
       event.stopPropagation();
     }else{
+      setShowAlert(true);
       //if the cookie is not found, create a new cookie with this data.
       attributes.name = windowName.current.value;
       attributes.width = windowWidth.current.value;
@@ -57,22 +66,23 @@ function Add() {
         attributes.color = "Ebony";
       }
 
-      if(Cookies.get('sugar') == null){
-        Cookies.set('sugar', [attributes]);
+      if(myStorage.getItem('sugar') == null){
+        myStorage.setItem('sugar', JSON.stringify([attributes]));
       }else{
         //or else unpack the cookie and add more data to it.
-        let temp = JSON.parse(Cookies.get('sugar'));
+        let temp = JSON.parse(myStorage.getItem('sugar'));
         temp.push(attributes);
         //console.log(temp);
-        Cookies.set('sugar', temp);
+        myStorage.setItem('sugar', JSON.stringify(temp));
       }
+      console.log(attributes);
+      console.log(myStorage.getItem('sugar'));
       //check what is in the cookie
       //console.log(attributes);
       //window.alert("Sugar cookie currently contains: " + Cookies.get('sugar'));
     }
 
     setValidated(true);
-
   };
 
   const AdditionalOptionSubmit = (event) => {
@@ -87,9 +97,8 @@ function Add() {
     attributes.color = color.current.value;
     //console.log(attributes);
     handleClose();
-  };
 
-  const [show, setShow] = useState(false);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -113,6 +122,9 @@ function Add() {
 
   return (
     <React.StrictMode>
+        <Alert show={showAlert} onClose={() => setShowAlert(false)} variant="success" dismissible>
+          <Alert.Heading>Window successfully entered</Alert.Heading>
+        </Alert>
       <Carousel></Carousel>
       <div class="m-5">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>

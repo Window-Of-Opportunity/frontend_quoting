@@ -19,7 +19,7 @@ function Login() {
     <div>
     <div fluid style={{ left: "0", right: "0", position:'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)", backgroundImage:`url(${test})`, backgroundSize: "cover", filter: 'blur(20px)'}}></div>
     <div fluid style={{ left: "0", right: "0", position:'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)"}}>
-        <Jumbotron>
+        <Jumbotron style={{minWidth: "40%"}}>
         <h1>Login:</h1>
         <br></br>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -43,10 +43,6 @@ function Login() {
               id="inputPassword5"
               aria-describedby="passwordHelpBlock"
             />
-            <Form.Text id="passwordHelpBlock" muted>
-              Your password must be 8-20 characters long, contain letters and numbers, and
-              must not contain spaces, special characters, or emoji.
-            </Form.Text>
             <Form.Control.Feedback type="invalid">
               Please provide a valid password.
             </Form.Control.Feedback>

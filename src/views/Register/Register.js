@@ -20,7 +20,7 @@ function Register() {
       <div>
           <div fluid style={{ left: "0", right: "0", position: 'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)", backgroundImage: `url(${test})`, backgroundSize: "cover", filter: 'blur(20px)'}}></div>
           <div fluid style={{ left: "0", right: "0", position: 'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)" }}>
-              <Jumbotron>
+              <Jumbotron style={{minWidth: "40%"}}>
                   <h1>Registration:</h1>
                   <br></br>
                   <Form noValidate validated={validated} onSubmit={handleSubmit}>

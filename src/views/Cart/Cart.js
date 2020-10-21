@@ -1,32 +1,35 @@
 import React, {useState} from 'react';
 import {Button, Modal, Card, CardDeck, ListGroup, ListGroupItem} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
-import Cookies from 'js-cookie';
 
 
 function Cart() {
 
-  var [products, setProducts] = useState(1);
+  var [products, setProducts] = useState([]);
   var [selectedRows] = useState(1);
 
-  //Cookies.remove('chocolate');
+  var myStorage = sessionStorage;
+
+  //myStorage.removeItem('chocolate');
   //get products from the local cookie 'sugar', if empty products is an empty array.
-  if(Cookies.get('sugar') == null){
+  if(myStorage.getItem('sugar') == null){
     products = [];
   }else{
     //else set products to cookie value
-    products = JSON.parse(Cookies.get('sugar'));
+    products = JSON.parse(myStorage.getItem('sugar'));
   }
 
   //cookie for row selection
   //if the cookie does not exist selectedRows is an empty array
-  if(Cookies.get('chocolate') == null){
+  if(myStorage.getItem('chocolate') == null){
     selectedRows = [];
   }else{
     //sort rows received from cookie
-    selectedRows = JSON.parse(Cookies.get('chocolate'));
+    selectedRows = JSON.parse(myStorage.getItem('chocolate'));
     selectedRows.sort((a, b) => (a.id > b.id) ? 1 : -1);
   }
+
+  //console.log(products);
 
   //generate unique primary keys
   generatePrimaryKeys();
@@ -37,7 +40,7 @@ function Cart() {
   const [show, setShow] = useState(false);
 
   function handleClose(){
-    Cookies.remove('chocolate');
+    myStorage.removeItem('chocolate');
     setShow(false)
   };
 
@@ -61,8 +64,7 @@ function Cart() {
           }
         }
       }
-      Cookies.set('chocolate', selectedRows);
-      console.log(JSON.parse(Cookies.get('chocolate')));
+      myStorage.setItem('chocolate', JSON.stringify(selectedRows));
     },
     onSelectAll: (isSelect, rows, e) => {
       if(!isSelect){
@@ -73,7 +75,7 @@ function Cart() {
           selectedRows.push(products[i]);
         }
       }
-      Cookies.set('chocolate', selectedRows);
+      myStorage.setItem('chocolate', JSON.stringify(selectedRows));
       //log(selectedRows);
     },
     selected: []
@@ -115,10 +117,11 @@ function Cart() {
       //console.log("Duplicating: " + selectedRows[i].id);
     }
     generatePrimaryKeys();
-    Cookies.set('sugar', products);
-    setProducts(JSON.parse(Cookies.get('sugar')));
-    Cookies.remove('chocolate');
-    //console.log(products);
+    myStorage.setItem('sugar', JSON.stringify(products));
+    setProducts(JSON.parse(myStorage.getItem('sugar')));
+    myStorage.removeItem('chocolate');
+    console.log(JSON.parse(myStorage.getItem('sugar')));
+    console.log(products);
   }
 
   //delete row func
@@ -131,9 +134,9 @@ function Cart() {
       //console.log("Deleting: " + selectedRows[i].id);
     }
     generatePrimaryKeys();
-    Cookies.set('sugar', products);
-    setProducts(JSON.parse(Cookies.get('sugar')));
-    Cookies.remove('chocolate');
+    myStorage.setItem('sugar', JSON.stringify(products));
+    setProducts(JSON.parse(myStorage.getItem('sugar')));
+    myStorage.removeItem('chocolate');
     //console.log(products);
   }
   
