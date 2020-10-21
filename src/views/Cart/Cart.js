@@ -168,9 +168,9 @@ function Cart() {
           <Modal.Title>Advanced Window Inspection View</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CardDeck>
+          <CardDeck class="d-flex flex-row flex-nowrap overflow-auto">
             {selectedRows.map((product) => (
-              <Card style={{ minWidth: '200px', marginBottom: "20px" }}>
+              <Card style={{ minWidth: '200px', margin: '20px' }}>
                 <Card.Body>
                   <Card.Title><b>Name:</b> {product.name}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted"><b>ID:</b> {product.id}</Card.Subtitle>

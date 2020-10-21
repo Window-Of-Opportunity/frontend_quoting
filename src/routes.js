@@ -6,6 +6,7 @@ import Login from './views/Login/Login';
 import Cart from './views/Cart/Cart';
 import Pricing from './views/Pricing/Pricing';
 import Agreement from './views/Agreement/Agreement';
+import Pdf from './views/Pdf/Pdf';
 import Test from './views/Test/Test';
 import {
     BrowserRouter as Router,
@@ -42,8 +43,11 @@ export const Routes = () => {
                 <Route exact path="/Agreement">
                     <Agreement />
                 </Route>
-		        <Route exact path="/Test">
+                <Route exact path="/Test">
                     <Test />
+                </Route>
+		        <Route exact path="/Pdf">
+                    <Pdf />
                 </Route>
             </Switch>
         </Router>

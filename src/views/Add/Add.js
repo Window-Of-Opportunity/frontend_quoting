@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import test from './test.png';
-import { InputGroup, Form, Col, Carousel, Button, Modal} from 'react-bootstrap';
+import Carousel from './../../components/WindowCarousel/WindowCarousel'
+import { InputGroup, Form, Col, Button, Modal} from 'react-bootstrap';
 import Cookies from 'js-cookie';
 
 //Window types
@@ -113,36 +113,7 @@ function Add() {
 
   return (
     <React.StrictMode>
-      <Carousel controls = {true}>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={test}
-            width="750"
-            height="750"
-            resizemode="contain"
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3 style={{ color: 'black' }}>Single Hung</h3>
-            <p style={{ color: 'black' }}>A basic window</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={test}
-            width="750"
-            height="750"
-            resizemode="contain"
-            alt="Second slide"
-          />
-          <Carousel.Caption>
-            <h3 style={{ color: 'black' }}>Double Hung</h3>
-            <p style={{ color: 'black' }}>A less basic window</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+      <Carousel></Carousel>
       <div class="m-5">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
