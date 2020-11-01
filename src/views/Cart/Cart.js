@@ -149,7 +149,7 @@ function Cart() {
 
   //render
   return (
-    <div class="m-5">
+    <div style={{width:"100%", padding:"20px"}}>
       <Button href="/Add" variant="dark">Back</Button>{' '}
       <p></p>
       <BootstrapTable

@@ -58,11 +58,11 @@ function Add() {
       //if statement to take care of additional options
       if(defaultAdditionalOptions){
         attributes.numPanes = 3;
-        attributes.obscured = "off";
-        attributes.tempered = "off";
+        attributes.obscured = false;
+        attributes.tempered = false;
         attributes.gasFillingType = "Argon";
-        attributes.lowE3 = "on";
-        attributes.nailingFlange = "off";
+        attributes.lowE3 = true;
+        attributes.nailingFlange = false;
         attributes.color = "Ebony";
       }
 
@@ -125,8 +125,10 @@ function Add() {
         <Alert show={showAlert} onClose={() => setShowAlert(false)} variant="success" dismissible>
           <Alert.Heading>Window successfully entered</Alert.Heading>
         </Alert>
-      <Carousel></Carousel>
-      <div class="m-5">
+      <div>
+        <Carousel></Carousel>
+      </div>
+      <div style={{position:'absolute', bottom:0, width:"100%", padding:"20px"}}>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} controlId="validationCustom05">
@@ -138,7 +140,7 @@ function Add() {
                 required
               >
                 {WINDOW_TYPES.map((value, index) => {
-                  return <option value={value}>{value}</option>
+                  return <option value={value}>{value}</option>;
                 })}
               </Form.Control>
             </Form.Group>

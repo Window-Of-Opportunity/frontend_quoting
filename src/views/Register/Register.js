@@ -20,7 +20,7 @@ function Register() {
       <div>
           <div fluid style={{ left: "0", right: "0", position: 'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)", backgroundImage: `url(${test})`, backgroundSize: "cover", filter: 'blur(20px)'}}></div>
           <div fluid style={{ left: "0", right: "0", position: 'fixed', justifyContent: "center", alignItems: "center", display: "flex", width: "100%", minHeight: "calc(100vh - 56px)" }}>
-              <Jumbotron style={{minWidth: "40%"}}>
+              <Jumbotron style={{color: "white", background: "rgba(0,0,0,0.4)", border: '1px solid rgba(0,0,0,0.1)', borderRadius: '3px', minWidth: "40%"}}>
                   <h1>Registration:</h1>
                   <br></br>
                   <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -56,7 +56,7 @@ function Register() {
                               id="inputPassword5"
                               aria-describedby="passwordHelpBlock"
                           />
-                          <Form.Text id="passwordHelpBlock" muted>
+                          <Form.Text id="passwordHelpBlock">
                               Your password must be 8-20 characters long, contain letters and numbers, and
                               must not contain spaces, special characters, or emoji.
                     </Form.Text>
@@ -72,7 +72,7 @@ function Register() {
                               id="inputPassword5"
                               aria-describedby="passwordHelpBlock"
                           />
-                          <Form.Text id="passwordHelpBlock" muted>
+                          <Form.Text id="passwordHelpBlock">
                               Re-enter your previous password
                     </Form.Text>
                           <Form.Control.Feedback type="invalid">
