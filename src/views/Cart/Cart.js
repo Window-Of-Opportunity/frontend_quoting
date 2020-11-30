@@ -140,6 +140,17 @@ function Cart() {
     //console.log(products);
   }
   
+  //delete row func
+  function saveCart(){
+    
+    //console.log(products);
+  }
+  
+  function saveSelection(){
+    
+    //console.log(products);
+  }
+  
   //generate PKs for table
   function generatePrimaryKeys(){
     for(var i = 0; i < products.length; i++){
@@ -163,7 +174,8 @@ function Cart() {
       <Button variant="dark" onClick={deleteRow}>Delete</Button>{' '}
       <Button variant="dark" onClick={duplicateRow}>Duplicate</Button>{' '}
       <Button variant="dark" onClick={handleShow}>Examine</Button>{' '}
-      <Button variant="dark">Save</Button>{' '}
+      <Button variant="dark" onClick={saveCart}>Save</Button>{' '}
+	  <Button variant="dark" onClick={saveSelection}>Save Selection</Button>{' '}
       <Button variant="dark" href="windowofopportunity://">AR View</Button>{' '}
       <Button href="/Pricing" variant="dark" style={{ float: 'right' }}>Generate Quote</Button>{' '}
       <Modal size='xl' show={show} onHide={handleClose} overflow-x="auto">
