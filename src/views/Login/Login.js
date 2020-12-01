@@ -1,31 +1,41 @@
 import React, {useState} from 'react';
 import test from './test.jpg';
-import {Jumbotron, Button, Form} from 'react-bootstrap';
+import {Jumbotron, Button, Form, Modal} from 'react-bootstrap';
+import Cookie from 'js-cookie'
 
 
 
 function Login() {
-	var url = 'http://back-woop.herokuapp.com/login';
-	var test_url = 'http://127.0.0.1:5000/login';
+	
+	
 	const [validated, setValidated] = useState(false);
+	
+	const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+	
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 		
 	const handleSubmit = (event) => {
+		var baseUrl = window.$base_url; //global variable initialised in index.js
+		
 		const form = event.currentTarget;
+		event.preventDefault();
 		if (form.checkValidity() === false) {
-		  event.preventDefault();
 		  event.stopPropagation();
 		}
-
+		
 		setValidated(true);
-		const data = new FormData(form.current)
-		  fetch(test_url, {
+		
+		var obj = {'username':username, 'password': password};
+		
+		  fetch(baseUrl+'/login', {
 		  method: 'POST',
-		  body: JSON.stringify(username, password),
+		  body: JSON.stringify(obj),
 		  headers: { 'Content-Type': 'application/json' },
 		})
-		.then(.then(function(response) {
+		.then(function(response) {
 			// Shorthand to check for an HTTP 2xx response status.
 			// See https://fetch.spec.whatwg.org/#dom-response-ok
 			if (response.ok) {
@@ -37,9 +47,12 @@ function Login() {
 			  }).then(function(response) {
 				return response.json();
 			  }).then(function(json) {
-				ChromeSamples.log('Request succeeded with JSON response:', json);
+				console.log('Request succeeded with JSON response:', json);
+				Cookie.set('access_token',json['access_token']);
+				Cookie.set('refresh_token',json['refresh_token']);
+				handleShow();
 			  }).catch(function(error) {
-				ChromeSamples.log('Request failed:', error.message);
+				console.log('Request failed:', error.message);
 			  });
 	};
 
@@ -53,10 +66,10 @@ function Login() {
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <p>
             <Form.Group controlId="validationCustom01">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 required
-                type="username"
+                type="email"
 				value={username}
 				onChange={e => setUsername(e.target.value)}
               />
@@ -85,7 +98,19 @@ function Login() {
         </Form>
       </Jumbotron>
     </div>
+	<Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Successful Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Successfully Logged In {username}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+     </Modal>
     </div>
+	
   );
 }
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal, Card, CardDeck, ListGroup, ListGroupItem} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
-
+import Cookie from 'js-cookie'
 
 function Cart() {
 

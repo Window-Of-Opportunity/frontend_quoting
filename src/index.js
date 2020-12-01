@@ -6,6 +6,9 @@ import Navbar from './components/Navbar/Navbar';
 import Routes from './routes';
 import * as serviceWorker from './serviceWorker';
 
+//var base_url = 'http://back-woop.herokuapp.com/login';
+window.$base_url = 'http://127.0.0.1:5000';
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
