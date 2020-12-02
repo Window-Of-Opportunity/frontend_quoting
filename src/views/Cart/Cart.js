@@ -142,12 +142,65 @@ function Cart() {
   
   //delete row func
   function saveCart(){
-    
+    var baseUrl = window.$base_url; //global variable initialised in index.js
+		
+	fetch(baseUrl+'/add_windows_to_cart', {
+	method: 'POST',
+	body: JSON.stringify({'Windows':selectedRows}),
+	headers: { 
+	'Authorization': 'Bearer '+ Cookie.get('access_token'),
+	'Content-Type': 'application/json',
+	'Accept':'application/json'}
+	})
+	.then(function(response) {
+		// Shorthand to check for an HTTP 2xx response status.
+		// See https://fetch.spec.whatwg.org/#dom-response-ok
+		if (response.ok) {
+			return response;
+		}
+		// Raise an exception to reject the promise and trigger the outer .catch() handler.
+		// By default, an error response status (4xx, 5xx) does NOT cause the promise to reject!
+		throw Error(response.statusText);
+	}).then(function(response) {
+		return response.json();
+		}).then(function(json) {
+			console.log('Request succeeded with JSON response:', json);
+			}).catch(function(error) {
+			console.log('Request failed:', error.message);
+		}).catch(error => console.log(error) );
+	
     //console.log(products);
   }
   
   function saveSelection(){
-    
+    console.log(selectedRows[0]);
+	var baseUrl = window.$base_url; //global variable initialised in index.js
+		
+		
+	fetch(baseUrl+'/select_cart_item', {
+	method: 'POST',
+	body: JSON.stringify({'cart_id':selectedRows[0]['id']}),
+	headers: { 
+	'Authorization': 'Bearer '+ Cookie.get('access_token'),
+	'Content-Type': 'application/json',
+	'Accept':'application/json'}
+	})
+	.then(function(response) {
+		// Shorthand to check for an HTTP 2xx response status.
+		// See https://fetch.spec.whatwg.org/#dom-response-ok
+		if (response.ok) {
+			return response;
+		}
+		// Raise an exception to reject the promise and trigger the outer .catch() handler.
+		// By default, an error response status (4xx, 5xx) does NOT cause the promise to reject!
+		throw Error(response.statusText);
+	}).then(function(response) {
+		return response.json();
+		}).then(function(json) {
+			console.log('Request succeeded with JSON response:', json);
+			}).catch(function(error) {
+			console.log('Request failed:', error.message);
+		}).catch(error => console.log(error) );
     //console.log(products);
   }
   
